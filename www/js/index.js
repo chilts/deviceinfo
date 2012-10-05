@@ -21,25 +21,40 @@ var app = {
         var completeElem = document.querySelector('#' + id + ' .complete');
         completeElem.className = completeElem.className.split('hide').join('');
 
+        // ----------------------------------------------------------------------------
+        // --- device ---
+        // http://docs.phonegap.com/en/2.1.0/cordova_device_device.md.html#Device
+
+        var deviceName = window.device.name;
+        var deviceCordova = window.device.cordova;
+        var devicePlatform = window.device.platform;
+        var deviceVersion = window.device.version;
+        var deviceUuid = window.device.uuid;
+
+        document.querySelector('#app-device-name').innerHtml(deviceName);
+        document.querySelector('#app-device-cordova').innerHtml(deviceCordova);
+        document.querySelector('#app-device-platform').innerHtml(devicePlatform);
+        document.querySelector('#app-device-uuid').innerHtml(deviceUuid);
+        document.querySelector('#app-device-version').innerHtml(deviceVersion);
+
+        // ----------------------------------------------------------------------------
+        // --- compass ---
+
         // get the device information
-        var deviceHeading, deviceName, deviceVersion;
+        var compassHeading;
+
+        // gather information
         navigator.compass.getCurrentHeading(
             function(heading) {
-                deviceHeading = heading;
+                compassHeading = heading;
             },
             function() {
-                deviceHeading = 'Not defined';
+                compassHeading = 'Not defined';
             }
         );
-        deviceName = window.device.name;
-        deviceVersion = window.device.version;
 
-        // do the device info
-        var one = document.querySelector('#app-device-heading');
-        one.innerHtml(deviceHeading);
-        var two = document.querySelector('#app-device-name');
-        two.innerHtml(devicename);
-        var three = document.querySelector('#app-device-version');
-        three.innerHtml(deviceVersion);
+        document.querySelector('#app-compass-heading').innerHtml(compassHeading);
+
+        // ----------------------------------------------------------------------------
     }
 };
