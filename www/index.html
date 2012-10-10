@@ -25,22 +25,45 @@
 
     <h2>DeviceInfo</h2>
     <ul>
-      <li>Device Name=<span id="app-device-name"></span></li>
-      <li>Device Cordova=<span id="app-device-cordova"></span></li>
-      <li>Device Platform=<span id="app-device-platform"></span></li>
-      <li>Device UUID=<span id="app-device-uuid"></span></li>
-      <li>Device Version=<span id="app-device-version"></span></li>
+      <li>Device Name=<span id="app-device-name">(none)</span></li>
+      <li>Device Cordova=<span id="app-device-cordova">(none)</span></li>
+      <li>Device Platform=<span id="app-device-platform">(none)</span></li>
+      <li>Device UUID=<span id="app-device-uuid">(none)</span></li>
+      <li>Device Version=<span id="app-device-version">(none)</span></li>
     </ul>
 
     <h2>Compass</h2>
     <ul>
-      <li>Compass Heading=<span id="app-compass-heading"></span></li>
+      <li>Compass Heading=<span id="app-compass-heading">(none)</span></li>
     </ul>
 
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-      app.initialize();
+        app.initialize();
+        var isBrowser = false;
+        if( !window.device ) {
+            isBrowser = true;
+            console.log('creating a window.device');
+            window.device = {};
+            window.device.name = 'Chromium';
+            window.device.cordova = 'Codova v2.0.0';
+            window.device.platform = 'Android';
+            window.device.version = 'v2.3';
+            window.device.uuid = 'ef2e54f7-db1d-4647-b3c6-82272924ad0b';
+        }
+        if ( !navigator.compass ) {
+            isBrowser = true;
+            console.log('creating a window.compass');
+            navigator.compass = {};
+            navigator.compass.getCurrentHeading = function(success, error) {
+                success(12.25);
+            };
+        }
+        // load our device ready
+        if ( isBrowser ) {
+            app.deviceready();
+        }
     </script>
 
   </body>
