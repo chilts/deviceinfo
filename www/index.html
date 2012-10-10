@@ -15,7 +15,7 @@
 
   <body>
 
-    <div class="app">
+    <div id="app" class="app">
       <h1>DeviceInfo</h1>
       <div id="deviceready">
         <p class="status pending blink">Connecting to Device</p>
@@ -38,16 +38,9 @@
     </ul>
 
     <script type="text/javascript" src="phonegap.js"></script>
-    <!-- <script type="text/javascript" src="js/index.js"></script> -->
-    <!--
+    <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
       app.initialize();
-    </script>
-    -->
-    <script type="text/javascript">
-      document.addEventListener("deviceready", function() {
-          document.getElementById('deviceready').style.display = 'none';
-      }, false);
     </script>
 
   </body>
