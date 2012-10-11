@@ -85,8 +85,9 @@ var app = {
             log('Error in accelerometer : ' + err);
         }
 
-        navigator.accelerometer.watchAcceleration(onAccel, badAccel, { frequency : 250 } );
+        log('Doing accelerometer');
         navigator.accelerometer.getCurrentAcceleration(onAccel, badAccel);
+        navigator.accelerometer.watchAcceleration(onAccel, badAccel, { frequency : 250 } );
 
         // ----------------------------------------------------------------------------
     }
