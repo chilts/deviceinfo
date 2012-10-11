@@ -61,17 +61,15 @@ var app = {
         var compassHeading;
 
         // gather information
+        log('Doing compassHeading');
         navigator.compass.getCurrentHeading(
             function(heading) {
-                compassHeading = heading;
+                document.getElementById('app-compass-heading').innerHTML = heading;
             },
             function() {
-                compassHeading = 'Not defined';
+                document.getElementById('app-compass-heading').innerHTML = heading;
             }
         );
-
-        log('Doing compassHeading');
-        document.getElementById('app-compass-heading').innerHTML = compassHeading;
 
         // ----------------------------------------------------------------------------
     }
