@@ -74,15 +74,19 @@ var app = {
         // ----------------------------------------------------------------------------
         // --- acceleration ---
 
-        navigator.accelerometer.watchAcceleration(function(acc) {
+        function onAccel(acc) {
             document.getElementById('x').innerHTML = acc.x;
             document.getElementById('y').innerHTML = acc.y;
             document.getElementById('z').innerHTML = acc.z;
             document.getElementById('timestamp').innerHTML = '' + acc.timestamp;
-        }, function(err) {
-            log('Error in accelerometer : ' + err);
-        }, { frequency : 250 } );
+        }
 
+        function badAccel(err) {
+            log('Error in accelerometer : ' + err);
+        }
+
+        navigator.accelerometer.watchAcceleration(onAccel, badAccel, { frequency : 250 } );
+        navigator.accelerometer.getCurrentAcceleration(onAccel, badAccel);
 
         // ----------------------------------------------------------------------------
     }
