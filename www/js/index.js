@@ -1,14 +1,26 @@
+function log(msg) {
+    var ts = new Date();
+    var li = document.createElement('li');
+    li.innerHTML = '' + ts.toISOString() + ' : ' + msg;
+    var ul = document.getElementById('log');
+    ul.appendChild(li);
+}
+
 var app = {
     initialize: function() {
-        console.log('initialize(): entry');
+        log('initialize(): entry');
         this.bind();
     },
     bind: function() {
-        console.log('bind(): entry');
+        log('bind(): entry');
+        document.addEventListener('deviceready', this.deviceready, false);
+    },
+    init : function() {
+        log('init(): entry');
         document.addEventListener('deviceready', this.deviceready, false);
     },
     deviceready: function() {
-        console.log('deviceready(): entry');
+        log('deviceready(): entry');
         // This is an event handler function, which means the scope is the event.
         // So, we must explicitly called `app.report()` instead of `this.report()`.
         document.getElementById('app').style.display = 'none';
@@ -16,7 +28,8 @@ var app = {
     },
     report: function(id) {
         // Report the event in the console
-        console.log("Report: " + id);
+        log('report(): entry');
+        log("Report: " + id);
 
         // Toggle the state from "pending" to "complete" for the reported ID.
         // Accomplished by adding .hide to the pending element and removing
@@ -57,7 +70,7 @@ var app = {
             }
         );
 
-        console.log('Doing compassHeading');
+        log('Doing compassHeading');
         document.getElementById('app-compass-heading').innerHTML = compassHeading;
 
         // ----------------------------------------------------------------------------

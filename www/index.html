@@ -37,33 +37,13 @@
       <li>Compass Heading=<span id="app-compass-heading">(none)</span></li>
     </ul>
 
+    <h2>Log</h2>
+    <ul id="log"></ul>
+
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-        app.initialize();
-        var isBrowser = false;
-        if( !window.device ) {
-            isBrowser = true;
-            console.log('creating a window.device');
-            window.device = {};
-            window.device.name = 'Chromium';
-            window.device.cordova = 'Codova v2.0.0';
-            window.device.platform = 'Android';
-            window.device.version = 'v2.3';
-            window.device.uuid = 'ef2e54f7-db1d-4647-b3c6-82272924ad0b';
-        }
-        if ( !navigator.compass ) {
-            isBrowser = true;
-            console.log('creating a window.compass');
-            navigator.compass = {};
-            navigator.compass.getCurrentHeading = function(success, error) {
-                success(12.25);
-            };
-        }
-        // load our device ready
-        if ( isBrowser ) {
-            app.deviceready();
-        }
+        app.init();
     </script>
 
   </body>
