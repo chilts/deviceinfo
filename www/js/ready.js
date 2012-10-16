@@ -33,7 +33,7 @@ function deviceReady() {
     // get the compass info
     var compassHeading;
     log('Doing compassHeading');
-    navigator.compass.getCurrentHeading(
+    var watchId = navigator.compass.watchHeading(
         function(heading) {
             $('#app-compass-magnetic-heading').text(heading.magneticHeading);
             $('#app-compass-true-heading').text(heading.trueHeading);
@@ -42,7 +42,8 @@ function deviceReady() {
         },
         function() {
             $('#app-compass-magnetic-heading').text('Not Defined');
-        }
+        },
+        { frequency : 1000 } // every second
     );
 
     // ---
