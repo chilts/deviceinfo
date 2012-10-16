@@ -35,10 +35,13 @@ function deviceReady() {
     log('Doing compassHeading');
     navigator.compass.getCurrentHeading(
         function(heading) {
-            $('#app-compass-heading').text(heading);
+            $('#app-compass-magnetic-heading').text(heading.magneticHeading);
+            $('#app-compass-true-heading').text(heading.trueHeading);
+            $('#app-compass-heading-accuracy').text(heading.headingAccuracy);
+            $('#app-compass-timestamp').text(heading.timestamp);
         },
         function() {
-            $('#app-compass-heading').text('Not Defined');
+            $('#app-compass-magnetic-heading').text('Not Defined');
         }
     );
 
