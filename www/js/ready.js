@@ -49,28 +49,19 @@ function deviceReady() {
     // ---
 
     // acceleration
-    function onAccel(acc) {
-        $('#x').text(acc.x);
-        $('#y').text(acc.y);
-        $('#z').text(acc.z);
-        $('#timestamp').text(acc.timestamp);
-    }
-
-    function badAccel(err) {
-        err = err || '';
-        log('Error in accelerometer : ' + err);
-    }
-
     log('Doing accelerometer');
-    navigator.accelerometer.getCurrentAcceleration(onAccel, badAccel);
-
-    function jsonp(data) {
-        log(JSON.stringify(data));
-        return;
-        for( var i = 0; i < data.length; i++) {
-            log(i + ' ' + data[i]);
-        }
-    }
+    var watchAccId = navigator.accelerometer.watchAcceleration(
+        function(acc) {
+            $('#acc-x').text(acc.x);
+            $('#acc-y').text(acc.y);
+            $('#acc-z').text(acc.z);
+            $('#acc-timestamp').text(acc.timestamp);
+        },
+        function(err) {
+            $('#acc-timestamp').text('Error: ' + err);
+        },
+        { frequency : 1000 } // every second
+    );
 
     log('deviceReady(): exit');
 }
